@@ -11,3 +11,4 @@ What I've touched on so far:
   - HTML
   - Express.js
   - Different templating engines including: Pug, Handlebars, and EJS
+  - MVC Pattern
