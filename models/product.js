@@ -1,5 +1,21 @@
-//To be changed when a database is integrated
-const products = [];
+const fs = require('fs');
+const path = require('path');
+
+const p = path.join(
+    path.dirname(process.mainModule.filename), 
+    'data', 
+    'products.json'
+);
+
+const getProductsFromFile = cb => {
+    fs.readFile(p, (err, fileContent) => {
+        if(err){
+            return cb([]);
+        }
+
+        cb(JSON.parse(fileContent));
+    });
+};
 
 module.exports = class Product {
     constructor(title) {
@@ -7,11 +23,16 @@ module.exports = class Product {
     }
 
     save(){
-        products.push(this);
+        getProductsFromFile(products => {
+            products.push(this);
+            fs.writeFile(p, JSON.stringify(products), (err) => {
+                console.log(err);
+            });
+        });
     }
 
     // static ensures we can call this method on the class itself and not on an instantied object
-    static fetchAll() {
-        return products;
+    static fetchAll(cb) {
+       getProductsFromFile(cb);
     }
 }
