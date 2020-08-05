@@ -12,3 +12,4 @@ What I've touched on so far:
   - Express.js
   - Different templating engines including: Pug, Handlebars, and EJS
   - MVC Pattern
+  - Dynamic routes with EJS
