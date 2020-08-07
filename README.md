@@ -13,3 +13,5 @@ What I've touched on so far:
   - Different templating engines including: Pug, Handlebars, and EJS
   - MVC Pattern
   - Dynamic routes with EJS
+  - SQL and NoSQL
+  - MySQL
