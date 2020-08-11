@@ -15,3 +15,4 @@ What I've touched on so far:
   - Dynamic routes with EJS
   - SQL and NoSQL
   - MySQL
+  - Sequelize
