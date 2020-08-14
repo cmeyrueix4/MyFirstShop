@@ -15,7 +15,7 @@ const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 
 const errorController = require('./controllers/error');
-const mongoConnect = require('./util/database');
+const mongoConnect = require('./util/database').mongoConnect;
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -27,6 +27,7 @@ app.use((req, res, next) => {
     //     req.user = user;
     //     next();
     // }).catch(err => console.log(err));
+    next();
 });
 
 app.use('/admin/', adminRoutes);
