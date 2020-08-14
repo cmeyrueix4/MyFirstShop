@@ -18,3 +18,4 @@ What I've touched on so far:
   - SQL and NoSQL
   - MySQL
   - Sequelize
+  - MongoDB
