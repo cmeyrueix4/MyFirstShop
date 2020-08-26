@@ -2,11 +2,9 @@
 
 I am currently working through a NodeJS course where a multitude of different technologies are touched upon. This includes frameworks such as Pug, Express.js, and MongoDB. The course also touches upon MVC and REST API's. 
 
-This project can be run through npm start and accessed through localhost:3000.
-
 Throughout this course I am creating a Store website that touches upon all the topics listed above and more. I am working on everything from the front-end to the back-end and am excited to learn about more current technologies! 
 
-I have put into seperate folders the different versions of this application to be able to fully compare the differences and have a reference for later. I first created one where store data was saved to a local file which can be found in 'writetolocalfileversion' and another folder that shows how it was implemented with MySql (not including Sequelize) in 'mysqlversion'. 
+I have put into seperate folders the different versions of this application to be able to fully compare the differences and have a reference for later. I first created one where store data was saved to a local file, then implemented with MySql, then sequelize, and finally a mongodb version. All of these versions can be found in the differentImplementations folder. Currently working with the mongoose implemenation. 
 
 What I've touched on so far:
   - CSS styling
@@ -18,4 +16,5 @@ What I've touched on so far:
   - SQL and NoSQL
   - MySQL
   - Sequelize
-  - MongoDB: Compass, Mongoose
+  - MongoDB: Atlas, Compass, Mongoose
+  - Cookies and Sessions
