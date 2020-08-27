@@ -18,3 +18,5 @@ What I've touched on so far:
   - Sequelize
   - MongoDB: Atlas, Compass, Mongoose
   - Cookies and Sessions
+  - Bcryptjs
+  - Authentication

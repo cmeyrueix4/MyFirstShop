@@ -7,7 +7,7 @@ const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 // const expressHbs = require('express-handlebars')
 
-const MONGODB = 'mongodb://store-manager:manaGEME173@cluster0-shard-00-00.zurim.mongodb.net:27017,cluster0-shard-00-01.zurim.mongodb.net:27017,cluster0-shard-00-02.zurim.mongodb.net:27017/shop?ssl=true&replicaSet=atlas-96hs71-shard-0&authSource=admin&w=majority'
+const MONGODB = ''
 
 const app = express(); 
 const store = new MongoDBStore({
@@ -55,19 +55,6 @@ app.use(errorController.get404);
 
 mongoose.connect(MONGODB)
 .then(result => {
-    User.findOne().then(user => {
-        if(!user){
-            const user = new User({
-                name: 'Cyrielle',
-                email: 'test@test.com',
-                cart: {
-                    items: []
-                }
-            });
-            user.save();
-        }
-    });
-
     app.listen(3000);
 })
 .catch(err => console.log(err));

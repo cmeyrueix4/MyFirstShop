@@ -2,12 +2,12 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    name: {
+    email: {
         type: String,
         required: true
     },
 
-    email: {
+    password: {
         type: String,
         required: true
     },
@@ -64,27 +64,3 @@ userSchema.methods.clearCart = function() {
 }
 
 module.exports = mongoose.model("User", userSchema);
-
-
-//   getOrders() {
-//       const db = getDb();
-
-//       return db.collection('orders').find({'user._id': new ObjectId(this._id)}).toArray();
-//   }
-
-//   static findById(userId) {
-//     const db = getDb();
-//     return db
-//       .collection('users')
-//       .findOne({ _id: new ObjectId(userId) })
-//       .then(user => {
-//         console.log(user);
-//         return user;
-//       })
-//       .catch(err => {
-//         console.log(err);
-//       });
-//   }
-// }
-
-// module.exports = User;
