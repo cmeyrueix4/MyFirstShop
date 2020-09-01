@@ -4,6 +4,7 @@ const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const nodeMailer = require('nodemailer');
 const sendgrid = require('nodemailer-sendgrid-transport');
+const { validationResult } = require('express-validator/check');
 
 const transporter = nodeMailer.createTransport(sendgrid({
     auth: {
@@ -78,35 +79,36 @@ exports.postLogin = (req, res, next) => {
 exports.postSignup = (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
-    const confirmPass = req.body.confirmPassword;
+    const errors = validationResult(req);
 
-    User.findOne({ email: email }).then(userDoc => {
-        if (userDoc) {
-            req.flash('error', 'Email in already in use');
-            return res.redirect('/signup');
-        }
+    if (!errors.isEmpty()) {
+        return res.status(422).render('auth/signup', {
+            path: '/signup',
+            pageTitle: 'Signup',
+            errorMessage: errors.array()[0].msg
+        });;
+    }
 
-        return bcrypt.hash(password, 12).then(hashPass => {
-            const user = new User({
-                email: email,
-                password: hashPass,
-                cart: { items: [] }
-            });
 
-            return user.save();
-        }).then(result => {
-            res.redirect('/login');
-            return transporter.sendMail({
-                to: email,
-                from: '',
-                subject: 'Signup succeeded!',
-                html: '<h1>You successfully signed up!</h1>'
-            });
-        }).catch(err => {
-            console.log(err);
+    bcrypt.hash(password, 12).then(hashPass => {
+        const user = new User({
+            email: email,
+            password: hashPass,
+            cart: { items: [] }
         });
 
-    }).catch(err => console.log(err));
+        return user.save();
+    }).then(result => {
+        res.redirect('/login');
+        return transporter.sendMail({
+            to: email,
+            from: '',
+            subject: 'Signup succeeded!',
+            html: '<h1>You successfully signed up!</h1>'
+        });
+    }).catch(err => {
+        console.log(err);
+    });
 };
 
 exports.postLogout = (req, res, next) => {
@@ -192,19 +194,19 @@ exports.getNewPassword = (req, res, next) => {
 exports.postNewPassword = (req, res, next) => {
     const newPassword = req.body.password;
     const userId = req.body.userId;
-    const passwordToken = req.body.passwordToken; 
+    const passwordToken = req.body.passwordToken;
     let userReset;
 
-    User.findOne({resetToken: passwordToken, resetTokenExpiration: {$gt: new Date()}, _id: userId})
-    .then(user => {
-        userReset = user;
-        return bcrypt.hash(newPassword, 12);
-    }).then(hashPass => {
-        userReset.password = hashPass;
-        userReset.resetToken = null;
-        userReset.resetTokenExpiration = undefined;
-        return userReset.save();
-    }).then(result => {
-        res.redirect('/login');
-    }).catch(err => console.log(err))
+    User.findOne({ resetToken: passwordToken, resetTokenExpiration: { $gt: new Date() }, _id: userId })
+        .then(user => {
+            userReset = user;
+            return bcrypt.hash(newPassword, 12);
+        }).then(hashPass => {
+            userReset.password = hashPass;
+            userReset.resetToken = null;
+            userReset.resetTokenExpiration = undefined;
+            return userReset.save();
+        }).then(result => {
+            res.redirect('/login');
+        }).catch(err => console.log(err))
 };
