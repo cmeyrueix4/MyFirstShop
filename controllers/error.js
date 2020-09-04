@@ -6,7 +6,7 @@ exports.get404 = (req, res, next) => {
 };
 
 exports.get500 = (req, res, next) => {
-    res.status(404).render('500', {
+    res.status(500).render('500', {
         pageTitle: 'Error Occured', 
         path: '/500', 
         isAuthenticated: req.session.isLoggedIn});

@@ -20,3 +20,5 @@ What I've touched on so far:
   - Cookies and Sessions
   - Bcryptjs
   - Authentication
+  - Automatic Emails
+  - Multer file upload
