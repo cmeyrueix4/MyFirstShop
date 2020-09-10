@@ -23,3 +23,4 @@ What I've touched on so far:
   - Automatic Emails
   - Multer file upload
   - PDF generation with PDFkit
+  - Pagination
