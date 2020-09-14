@@ -24,3 +24,5 @@ What I've touched on so far:
   - Multer file upload
   - PDF generation with PDFkit
   - Pagination
+  - Payment through Stripe
+  - REST APIs
